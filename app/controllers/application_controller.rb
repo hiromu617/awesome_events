@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate
   helper_method :logged_in?, :current_user
 
+  
+  
   private
 
   def logged_in?
