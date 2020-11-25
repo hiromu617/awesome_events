@@ -1,4 +1,11 @@
 class Event < ApplicationRecord
+  has_one_attached :image, dependent: false
+  attr_accessor :remove_image
+  before_save :remove_image_if_user_accept
+  validates :image, 
+    content_type: [:png, :jpg, :jpeg],
+    size { less_than_or_equal_to: 10.megabytes }, 
+    dimention: { width: { max: 2000 }, height: { max: 2000} }
   has_many :tickets, dependent: :destroy
   belongs_to :owner, class_name: "User"
   
@@ -22,5 +29,9 @@ class Event < ApplicationRecord
     if start_at >= end_at
       errors.add(:start_at, "は終了時間よりも前に設定してください")
     end
+  end
+
+  def remove_image_if_user_accept
+    self.image = nil if ActiveRecord::Type::Boolean.new.cast(remove_image)
   end
 end
