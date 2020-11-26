@@ -2,10 +2,8 @@ class Event < ApplicationRecord
   has_one_attached :image, dependent: false
   attr_accessor :remove_image
   before_save :remove_image_if_user_accept
-  validates :image, 
-    content_type: [:png, :jpg, :jpeg],
-    size { less_than_or_equal_to: 10.megabytes }, 
-    dimention: { width: { max: 2000 }, height: { max: 2000} }
+  validates :image, content_type: [:png, :jpg, :jpeg], size: { less_than_or_equal_to: 10.megabytes }, 
+    dimension: { width: { max: 2000 }, height: { max: 2000} }
   has_many :tickets, dependent: :destroy
   belongs_to :owner, class_name: "User"
   
