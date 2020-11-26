@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+  searchkick language: "japanese"
   has_one_attached :image, dependent: false
   attr_accessor :remove_image
   before_save :remove_image_if_user_accept
@@ -31,5 +32,15 @@ class Event < ApplicationRecord
 
   def remove_image_if_user_accept
     self.image = nil if ActiveRecord::Type::Boolean.new.cast(remove_image)
+  end
+
+  def search_data
+    {
+      name: name,
+      place: place,
+      content: content,
+      owner_name: owner&.name,
+      start_at: start_at
+    }
   end
 end

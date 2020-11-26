@@ -6,6 +6,7 @@
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
+require("get_from_turbolinks")
 
 import "bootstrap"
 import "bootstrap/scss/bootstrap.scss"
