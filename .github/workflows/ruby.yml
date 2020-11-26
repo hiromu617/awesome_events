@@ -23,7 +23,7 @@ jobs:
         sudo sysctl -w fs.file-max=262144
         sudo sysctl -w vm.max_map_count=262144
     - name: Run Elasticsearch  #((2))
-      uses: hiromu617/elasticsearch-with-plugins-action
+      uses: hiromu617/elasticsearch-with-plugins-action@master
       with:
         stack-version: 7.6.0
         plugins: |
